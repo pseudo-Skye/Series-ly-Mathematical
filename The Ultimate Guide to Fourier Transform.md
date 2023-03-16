@@ -1,6 +1,6 @@
 # The Ultimate Guide to Fourier Transform: Learn from Scratch to Pro
 
-_**Author:**_ [_pseudo\_Skye_](https://github.com/pseudo-Skye) _**Updated:** 2023-03-11_
+_**Author:**_ [_pseudo\_Skye_](https://github.com/pseudo-Skye) _**Updated:** 2023-03-16_
 
 Welcome to my tutorial on Fourier Transform! In this tutorial, I will be covering all the **fundamental content of Fourier Series**, including all the **mathematical proofs** you need to understand how Fourier Transform works.
 
@@ -261,7 +261,7 @@ $$
 Function $e^{ix}$ in the two-dimensional complex space (here $||f(x)||$ **represents the norm of a certain value of the complex** **function**):
 
 <p align="center" width="100%">
-<img width = "30%" src = "https://user-images.githubusercontent.com/117964124/221768218-d1120f26-8997-4d8b-bbe5-64d74f70d707.png">
+<img width = "30%" src = "https://user-images.githubusercontent.com/117964124/225485845-0c67e639-545d-4684-ab75-d9dd9c4082de.png">
 </p>
 
 $$\\begin{align\*}  
@@ -301,7 +301,7 @@ $$\\left\\langle e^{i m x}, e^{i n x}\\right\\rangle=\\int\_{-\\pi}^\\pi e^{i m 
 **Discrete Fourier Transform (DFT) assumes that the input signal is periodic with period N, which means the input signal is assumed to repeat itself every N samples.** So, suppose we **evenly** sample $N$ points within the period of the function $f(x)$, where $T=2\\pi$, the sample denotes as $\[f\_0, f\_1, ..., f\_{N-1}\]$. $$f(x) = \\sum\_{n=-\\infty}^{\\infty} c\_{k} e^{ikx}$$ 
 
 <p align="center" width="100%">
-<img width = "40%" src = "https://user-images.githubusercontent.com/117964124/221496522-c3b01044-9855-4d19-9c08-ea020f057a1e.png">
+<img width = "40%" src = "https://user-images.githubusercontent.com/117964124/225488011-5bf653dd-56f7-400a-aa4d-c10c5fcc8676.png">
 </p>
 
 #### **(1) Question** 1: how to obtain the value of the second data point $x=\\frac{2\\pi}{N}$?
@@ -311,7 +311,7 @@ If we take the second data point $x=\\frac{2\\pi}{N}$ into the function $f(x)$, 
 When $N=8$, means we sample 8 points within the period, $e^{k\\frac{2\\pi i}{8}}$ can be represented as follows in the complex space:
 
 <p align="center" width="100%">
-<img width = "40%" src = "https://user-images.githubusercontent.com/117964124/221767984-8acd191d-0a31-46d1-8226-e7ba75cac9e3.png">
+<img width = "40%" src = "https://user-images.githubusercontent.com/117964124/225489830-92e09504-5510-48af-8001-c5ac5bf8b78e.png">
 </p>
 
 From the above figure, we can tell that when $k = 9$, we get the same complete value as $k=1$. Thus, even though $k$ ranges from negative infinity to positive infinity, the complex value would only vary between $k=0$ to $k=7$. Now, we let $w=e^{\\frac{2\\pi i}{N}}$, then $w^N = w^0 = 1$, we can summarize the equation of $f\\left(\\frac{2\\pi}{N}\\right)$ as 
@@ -691,18 +691,18 @@ f\_{N-1}
 \\end{array}\\right\]  
 $$
 
-Now, we start with a simple example of a $4 \\times 4$ DFT matrix, and re-allocate the columns by grouping them into odd and even columns as $\\tilde{F\_4}$. The matrix can be further decomposed into four segments.
+Now, we start with a simple example of a $8 \\times 8$ DFT matrix, and re-allocate the columns by grouping them into odd and even columns as $\\widetilde{F\_8}$. The matrix can be further decomposed into four segments.
 
 <p align="center" width="100%">
-<img width = "40%" src = "https://user-images.githubusercontent.com/117964124/223627839-24e2ec6c-1a5b-474b-b9e7-6f9d8258e2cb.png">
+<img width = "70%" src = "https://user-images.githubusercontent.com/117964124/225498200-bd60a38b-ef48-4310-80cd-1475c68730a9.png">
 </p>
 
-As four dimensional DFT matrix can be written as 
+As eight dimensional DFT matrix can be written as 
 
 $$  
-\\widetilde{F\_4}=\\left\[\\begin{array}{cc}  
-F\_2 & D\_2 F\_2 \\\\  
-F\_2 & -D\_2 F\_2  
+\\widetilde{F\_8}=\\left\[\\begin{array}{cc}  
+F\_4 & D\_4 F\_4 \\\\  
+F\_4 & -D\_4 F\_4  
 \\end{array}\\right\]  
 $$
 
