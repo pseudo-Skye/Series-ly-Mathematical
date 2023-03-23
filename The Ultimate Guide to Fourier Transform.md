@@ -1,6 +1,6 @@
 # The Ultimate Guide to Fourier Transform: Learn from Scratch to Pro
 
-_**Author:**_ [_pseudo\_Skye_](https://github.com/pseudo-Skye) _**Updated:** 2023-03-16_
+_**Author:**_ [_pseudo\_Skye_](https://github.com/pseudo-Skye) _**Updated:** 2023-03-23_
 
 Welcome to my tutorial on Fourier Transform! In this tutorial, I will be covering all the **fundamental content of Fourier Series**, including all the **mathematical proofs** you need to understand how Fourier Transform works.
 
@@ -12,43 +12,35 @@ Whether you're a beginner or an experienced practitioner, this tutorial will pro
 
 ### Content
 
-1\. [Fundamentals](#1-fundamentals)
-
-            1.1 [Sinusoid functions](#11-sinusoid-functions)
-
-            1.2 [Trig function orthogonality](#12-trig-function-orthogonality)
-
-            1.3 [Even and odd functions](#13-even-and-odd-functions)
-
-            1.4 [Matrix-vector multiplication](#14-matrix-vector-multiplication)
-
-2\. [Fourier Series](#2-fourier-series)
-
-3\. [Complex Form of Fourier Series](#3-complex-form-of-fourier-series)
-
-             3.1 [Euler's formula](#31-eulers-formula)
-
-             3.2 [Complex Fourier series](#32-complex-fourier-series) 
-
-             3.3 [Complex basis function](#33-complex-basis-function)
-
-4\. [Discrete Fourier Transform](#4-discrete-fourier-transform)
-
-             4.1 [Understanding DFT step by step](#41-understanding-dft-step-by-step)
-
-             4.2 [The DFT matrix](#42-the-dft-matrix)
-
-                          4.2.1 [Hermitian matrices](#421-hermitian-matrices)
-
-                          4.2.2 [Unitary matrices](#422-unitary-matrices)
-
-                          4.2.3 [Properties of DFT matrix](#423-properties-of-dft-matrix)
-
-5\. [Fast Fourier Transform](#5-fast-fourier-transform)
-
-6\. [The Continuous-time Fourier Transform](#6-the-continuous-time-fourier-transform)
-
-7\. [Reference](#7-reference)
+1\. [Fundamentals](#1-fundamentals)  
+            1.1 [Sinusoid functions](#11-sinusoid-functions)              
+            1.2 [Trig function orthogonality](#12-trig-function-orthogonality)              
+            1.3 [Even and odd functions](#13-even-and-odd-functions)              
+            1.4 [Matrix-vector multiplication](#14-matrix-vector-multiplication)              
+            1.5 [Square of an integral](#15-square-of-an-integral)             
+            1.6 [Integration by parts](#16-integration-by-parts)  
+            1.7 [Schwarz inequality](#17-schwarz-inequality)  
+2\. [Fourier Series](#2-fourier-series)  
+3\. [Complex Form of Fourier Series](#3-complex-form-of-fourier-series)  
+            3.1 [Euler's formula](#31-eulers-formula)  
+            3.2 [Complex Fourier series](#32-complex-fourier-series)   
+            3.3 [Complex basis function](#33-complex-basis-function)  
+4\. [Discrete Fourier Transform](#4-discrete-fourier-transform)  
+            4.1 [Understanding DFT step by step](#41-understanding-dft-step-by-step)  
+            4.2 [The DFT matrix](#42-the-dft-matrix)  
+                          4.2.1 [Hermitian matrices](#421-hermitian-matrices)  
+                          4.2.2 [Unitary matrices](#422-unitary-matrices)  
+                          4.2.3 [Properties of DFT matrix](#423-properties-of-dft-matrix)  
+5\. [Fast Fourier Transform](#5-fast-fourier-transform)  
+6\. [The Continuous-time Fourier Transform](#6-the-continuous-time-fourier-transform)  
+7\. [Statistics of Time Signals](#7-statistics-of-time-signals)  
+            7.1 [Energy](#71-energy)  
+            7.2 [Average](#72-average)  
+            7.3 [Standard deviation](#73-standard-deviation)  
+            7.4 [Frequency operator of signal](#74-frequency-operator-of-signal)  
+            7.5 [Time operator of signal](#75-time-operator-of-signal)  
+            7.6 [Uncertainty principle](#76-uncertainty-principle)  
+8\. [Reference](#8-reference)
 
 ## 1\. Fundamentals
 
@@ -120,6 +112,39 @@ x\_3 \\\\
 x\_2  
 \\end{array}\\right\]=x\_1 \\overrightarrow{\\boldsymbol{a}\_{\\mathbf{1}}}+x\_4 \\overrightarrow{\\boldsymbol{a}\_{\\mathbf{4}}}+x\_3 \\overrightarrow{\\boldsymbol{a}\_{\\mathbf{3}}}+x\_2 \\overrightarrow{\\boldsymbol{a}\_{\\mathbf{2}}}  
 $$
+
+### 1.5 Square of an integral
+
+Consider the sum $$\\sum\_{x=1}^{n}x$$
+
+After we square the summation, we have $$\\left(\\sum\_{x=1}^{n}x\\right)^2 = \\left(\\sum\_{x=1}^{n}x\\right) \\left(\\sum\_{x=1}^{n}x\\right) = \\left(\\sum\_{x=1}^{n}x\\right) \\left(\\sum\_{y=1}^{n}y\\right) = \\sum\_{x=1}^{n} \\sum\_{y=1}^{n} x \\times y \\neq \\sum\_{x=1}^{n}x^2$$
+
+Thus, the square of the integral is given by $$\\left(\\int\_a^b f(x) d x\\right)^2=\\left(\\int\_a^b f(x) d x\\right)\\left(\\int\_a^b f(y) d y\\right)=\\int\_a^b \\int\_a^b f(x) f(y) d x d y$$
+
+If $g(x) = a(x)+b(x)i dx$ is a complex function, the conjugate of its integral $\\overline {\\int g(x)dx}$ is given by $$\\overline {\\int a(x)+b(x)i dx} = \\overline {\\int a(x) dx+i \\int b(x) dx} =\\int a(x)dx-i \\int b(x) dx = \\int g^\*(x)dx$$
+
+The absolute square $|\\int\_a^b g(x) d x|^2$ is calculated by multiplying it by its complex conjugate. Thus, we have $$|\\int\_a^b g(x) d x|^2=\\left(\\int\_a^b g(x) d x\\right)\\overline{\\left(\\int\_a^b g(y) d y\\right)}=\\left(\\int\_a^b g(x) d x\\right) \\left(\\int\_a^b g^\*(y) d y\\right)=\\int\_a^b \\int\_a^b g(x) g^\*(y) d x d y$$
+
+### 1.6 Integration by parts
+
+Given function $u = f(x)$ and $v = g(x)$, we have $uv = \\int \\left(uv\\right)^{\\prime} dx = \\int u^{\\prime} v dx+ \\int uv^{\\prime} dx$, thus the integration by parts formula is given by $$\\int u^{\\prime} v dx =uv -  \\int uv^{\\prime} dx$$  
+We can also do the substitutions by taking $\\frac{du}{dx} = u^{\\prime}$ and $\\frac{dv}{dx} = v^{\\prime}$. Then we get $$\\int udv = uv -\\int vdu$$  
+For more exercises regarding the integration by parts, can be found [here](https://tutorial.math.lamar.edu/classes/calcii/integrationbyparts.aspx).
+
+### 1.7 Schwarz inequality
+
+Given two functions (can be complex number function) $f(x)$ and $g(x)$, we have 
+
+$$  
+\\begin{aligned}  
+&\\int|f(x)|^2 d x \\int|g(x)|^2 d x-\\left|\\int f^\*(x) g(x) d x\\right|^2\\\\  
+&= \\int f(x)f^\*(x) dx \\int g(y)g^\*(y)dy-\\int f^\*(x) g(x) d x \\overline{\\int f^\*(x) g(x) d x} \\\\  
+&= \\iint f(x)g(y)f^\*(x)g^\*(y) dx dy -\\iint f^\*(x) g^\*(y)f(y)g(x) dx d y \\\\  
+&= \\frac{1}{2} \\iint|f(x) g(y)-f(y) g(x)|^2 d x d y \\geq 0  
+\\end{aligned}  
+$$
+
+Thus, we have $\\int|f(x)|^2 d x \\int|g(x)|^2 d x \\geq \\left|\\int f^\*(x) g(x) d x\\right|^2$
 
 ## 2\. Fourier Series
 
@@ -843,10 +868,127 @@ $$
 x(t)=\\frac{1}{2 \\pi} \\sum\_{n=-\\infty}^{+\\infty} X(\\omega) e^{i \\omega t} d \\omega=\\frac{1}{2 \\pi} \\int\_{-\\infty}^{+\\infty} X(\\omega) e^{i \\omega t} d \\omega  
 $$
 
-## 7\. Reference
+\*In some materials, the Fourier transform and inverse Fourier transform are denoted by normalizing the function $e^{i \\omega t}$ by its length $\\sqrt{2\\pi}$ as we discussed in [3.3](#33-complex-basis-function). The normalized formula is given by
+
+$$X(\\omega)=\\frac{1}{\\sqrt{2\\pi}}\\int\_{-\\infty}^{\\infty} x(t) e^{-i \\omega t} d t, x(t)=\\frac{1}{\\sqrt{2 \\pi}} \\int\_{-\\infty}^{+\\infty} X(\\omega) e^{i \\omega t} d \\omega$$
+
+## 7\. Statistics of Time Signals
+
+### 7.1 Energy
+
+The energy or intensity of a signal per unit of time is generally $|x(t)|^2$. That is, in a small interval of time $\\Delta t$ it takes $|x(t)|^2 \\Delta t$ amount of energy to produce the signal at that time. As $|x(t)|^2$ is the energy per unit of time, the total temporal energy is obtained by integrating over all time as $E\_t=\\int|x(t)|^2 d t$. Similarly, the total energy of the spectrum is given by $E\_\\omega=\\int|X(\\omega)|^2 d\\omega$, where $|X(\\omega)|^2$ is the energy density per unit frequency. **The energy of the signal should be the same no matter the way to calculate it**. Thus, $E\_t = E\_\\omega$. 
+
+*   **Proof** based on [1.5](#15-square-of-an-integral):
+
+$$  
+\\begin{aligned}  
+E=\\int|x(t)|^2 d t & = \\int \\left|\\int \\frac{1}{\\sqrt{2 \\pi}} X(\\omega) e^{i\\omega t} d\\omega\\right|^2 dt\\\\  
+&= \\int \\left(\\int \\frac{1}{\\sqrt{2 \\pi}} X(\\omega) e^{i\\omega t} d\\omega \\overline {\\int \\frac{1}{\\sqrt{2 \\pi}} X(\\omega ^ \\prime) e^{i\\omega^ \\prime t} d\\omega^ \\prime}\\right) dt\\\\  
+& = \\int \\left(\\int \\frac{1}{\\sqrt{2 \\pi}} X(\\omega) e^{i\\omega t} d\\omega\\int \\frac{1}{\\sqrt{2 \\pi}} X^\*(\\omega^ \\prime) e^{-i\\omega^ \\prime t} d\\omega^ \\prime\\right) dt\\\\  
+& = \\frac{1}{2 \\pi} \\iiint X^\*\\left(\\omega^{\\prime}\\right) X(\\omega) e^{i\\left(\\omega-\\omega^{\\prime}\\right) t} d \\omega d \\omega^{\\prime} d t  
+\\end{aligned}  
+$$
+
+       Then, we let $$\\frac{1}{2 \\pi} \\int e^{i\\left(\\omega-\\omega^{\\prime}\\right) t} dt = \\delta\\left(\\omega-\\omega^{\\prime}\\right)$$
+
+       Which is known as the [Dirac delta function](https://books.physics.oregonstate.edu/GMM/deltaexp.html). Based on the definition, we have $\\delta\\left(\\omega-\\omega^{\\prime}\\right) = 0$ if $\\omega \\neq \\omega^{\\prime}$; and $\\delta\\left(\\omega-\\omega^{\\prime}\\right) = \\infty$ if $\\omega=\\omega^{\\prime}$. So, we only need to find the integral results of $$\\iint X^\*\\left(\\omega^{\\prime}\\right) X(\\omega) \\delta\\left(\\omega-\\omega^{\\prime}\\right) d \\omega d \\omega^{\\prime}=\\int X(\\omega) \\left\[ \\int X^\*(\\omega ^\\prime)\\delta\\left(\\omega-\\omega^{\\prime}\\right) d \\omega^{\\prime} \\right\] d \\omega$$
+
+       Note that the **Dirac delta function is a discontinuous function, which means we cannot calculate the integral directly**. By taking look at the integral $\\int X^\*(\\omega ^\\prime)\\delta\\left(\\omega-\\omega^{\\prime}\\right) d \\omega^{\\prime}$, we know that $\\delta (x) = 0$ when $w\\neq w^\\prime$, thus we only need to sum up the values when $w=w^\\prime$, which gives up the value $\\int X^\*(\\omega ^\\prime)\\delta\\left(\\omega-\\omega^{\\prime}\\right) d \\omega^{\\prime} = X^\*(\\omega)$. This is also known as **the property of the Dirac delta function** that $\\int f(x) \\delta(x) dx = f(0)$. We end up with $$\\iint X^\*\\left(\\omega^{\\prime}\\right) X(\\omega) \\delta\\left(\\omega-\\omega^{\\prime}\\right) d \\omega d \\omega^{\\prime} = \\int|X(\\omega)|^2 d \\omega$$
+
+       Hence, we conclude that $E=\\int|x(t)|^2 d t = \\int|X(\\omega)|^2 d \\omega$
+
+### 7.2 Average
+
+The reasons for defining an average are that it may give a gross characterization of the density and it may give an indication of where the density is concentrated. As $|x(t)|^2$ is the density function, we can have the mean of the signal as $\\langle t\\rangle=\\int t|x(t)|^2 d t$. Similarly, the average frequency is given by $\\langle \\omega\\rangle=\\int \\omega|X(\\omega)|^2 d \\omega$.
+
+### 7.3 Standard deviation
+
+Given the density function, we have the temporal standard deviation as $\\sigma^2\_t = \\int \\left(t-\\langle t\\rangle\\right)|x(t)|^2 d t$. If the standard deviation is small then most of the signal is concentrated around the mean time and it will go by quickly, which is an indication that we have a signal of short duration; similarly for long duration. Thus, the $\\sigma^2\_t$ shows the **duration** of the signal. Similary, the standard deviation of frequency is given by $\\sigma^2\_\\omega = \\int \\left(\\omega-\\langle \\omega\\rangle\\right)|X(\\omega)|^2 d \\omega$, which shows the **bandwidth** of the signal. 
+
+### 7.4 Frequency operator of signal
+
+Given the mean of the frequency defined as $\\langle \\omega\\rangle=\\int \\omega|X(\\omega)|^2 d \\omega$. In order to calculate the average frequency without calculating Fourier transform, we can rewrite the equation as
+
+$$\\begin{aligned}  
+\\langle \\omega\\rangle=\\int \\omega|X(\\omega)|^2 d \\omega &= \\int X^\*(\\omega)X(\\omega)\\omega d\\omega \\\\  
+&= \\int X(\\omega)\\omega \\overline {\\frac{1}{\\sqrt{2\\pi}}\\int x(t) e^{-i \\omega t} d t} d\\omega \\\\  
+&= \\frac{1}{\\sqrt{2\\pi}} \\int\\int x^\*(t) e^{i \\omega t} \\omega X(\\omega) d t d\\omega \\\\  
+&= \\frac{1}{\\sqrt{2\\pi}} \\int\\int x^\*(t) \\left(\\frac{1}{i} \\frac{d}{d t} \\right) e^{i \\omega t}X(\\omega) d t d\\omega \\\\  
+&= \\int x^\*(t) \\left(\\frac{1}{i} \\frac{d}{d t} \\right) \\frac{1}{\\sqrt{2\\pi}} \\int e^{i \\omega t}X(\\omega) d\\omega d t\\\\  
+&= \\int x^\*(t) \\left(\\frac{1}{i} \\frac{d}{d t} \\right) x(t) dt  
+\\end{aligned}$$
+
+Regarding the derivative operator $\\frac{d}{dx}$, you can find it [here](https://math.stackexchange.com/questions/340744/what-do-the-symbols-d-dx-and-dy-dx-mean). In the above equation, we denote the frequency operator as $\\mathcal{W} = \\frac{1}{i} \\frac{d}{d t}$. As an extension, we can also get that
+
+$$  
+\\begin{aligned}  
+\\left\\langle\\omega^2\\right\\rangle=\\int \\omega^2|X(\\omega)|^2 d \\omega & =\\int x^\*(t)\\left(\\frac{1}{i} \\frac{d}{d t}\\right)^2 x(t) d t \\\\  
+& =-\\int x^\*(t) \\frac{d^2}{d t^2} x(t) d t \\\\  
+& =\\int\\left|\\frac{d}{d t} x(t)\\right|^2 d t  
+\\end{aligned}  
+$$
+
+Also, by taking that $E=\\int|x(t)|^2 d t = \\int|X(\\omega)|^2 d \\omega$ and the above representation of average frequency by just time domain, we can also calculate the bandwidth of the signal without calculating Fourier transform as
+
+$$  
+\\begin{aligned}  
+\\sigma\_\\omega^2 &=\\int(\\omega-\\langle\\omega\\rangle)^2|X(\\omega)|^2 d \\omega \\\\  
+&=\\int \\omega^2 |X(\\omega)|^2 d \\omega - \\int 2 \\langle\\omega\\rangle \\omega |X(\\omega)|^2 d \\omega + \\int \\langle\\omega\\rangle^2 |X(\\omega)|^2 d \\omega \\\\  
+& = \\int x^\*(t)\\left(\\frac{1}{i} \\frac{d}{dt} \\right)^2 x(t) dt - \\int 2\\langle\\omega\\rangle x^\*(t) \\left(\\frac{1}{i} \\frac{d}{d t} \\right) x(t) dt + \\int \\langle\\omega\\rangle^2|x(t)|^2 d t\\\\  
+&=\\int x^\*(t) x(t) \\left( \\frac{1}{i} \\frac{d}{dt} - \\langle\\omega\\rangle\\right)^2 dt \\\\  
+& = \\int \\left| \\left( \\frac{1}{i} \\frac{d}{dt} - \\langle\\omega\\rangle\\right) x(t) \\right|^2 dt  
+\\end{aligned}  
+$$
+
+### 7.5 Time operator of signal
+
+Similar to the frequency operator $\\mathcal{W}$, based on the definition of the time averages $\\langle t\\rangle=\\int t|x(t)|^2 d t$, we can rewrite it as
+
+$$  
+\\begin{aligned}  
+\\langle t \\rangle=\\int t|x(t)|^2 d t &= \\int x^\*(t)x(t)t dt \\  
+&= \\int x(t)t \\overline {\\frac{1}{\\sqrt{2\\pi}}\\int X(\\omega) e^{i \\omega t} d \\omega} dt\\  
+&= \\frac{1}{\\sqrt{2\\pi}} \\int\\int X^\*(\\omega) e^{-i \\omega t} t x(t) d t d\\omega \\  
+&= \\frac{1}{\\sqrt{2\\pi}} \\int\\int X^\*(\\omega) \\left(-\\frac{1}{i} \\frac{d}{d w} \\right) e^{-i \\omega t} x(t) d t d\\omega\\  
+&= \\int X^\*(\\omega) \\left(-\\frac{1}{i} \\frac{d}{d w} \\right)\\frac{1}{\\sqrt{2\\pi}} \\int e^{-i \\omega t} x(t) d t d\\omega\\  
+&= \\int X^\*(\\omega) \\left(-\\frac{1}{i} \\frac{d}{d w} \\right) X(\\omega) d\\omega  
+\\end{aligned}  
+$$
+
+We denote the time operator as $\\mathcal{T} = -\\frac{1}{i} \\frac{d}{d \\omega}$. As an extension, following the steps we have conducted to calculate the average frequencies, we can also get that $$\\left\\langle t^2\\right\\rangle=\\int t^2|s(t)|^2 d t=\\int\\left|\\frac{d}{d \\omega} S(\\omega)\\right|^2 d \\omega$$
+
+### 7.6 Uncertainty principle
+
+In signal processing, the uncertainty principle states that the more precisely you know the frequency content of a signal (i.e., the narrower its frequency spectrum), the less precisely you can know the duration of the signal in time. Conversely, the more precisely you know the duration of the signal in time (i.e., the shorter its duration), the less precisely you can know the frequency content of the signal. The general uncertainty principle is given by $$\\sigma\_t \\sigma\_\\omega \\geq \\frac{1}{2}$$
+
+*   **Proof:**
+
+       Let's assume that without losing any important information or changing the behavior of the system, that the signals we are analyzing have an average value of zero in both time and frequency domains. In other words, we can shift the signal up or down in time or frequency by a constant amount, and the overall behavior of the system will not be affected.
+
+       Based on the frequency factor used to calculate the bandwidth in [7.4](#74-frequency-operator-of-signal), when the mean of time and frequency equals to 0, we have $$\\sigma^2\_t = \\int t|x(t)|^2 d t$$  
+       and $$\\sigma\_\\omega^2 = \\int \\left| \\frac{1}{i} \\frac{d}{dt} x(t) \\right|^2 dt=  \\int |x^\\prime (t)| ^2$$  
+       Therefore, $\\sigma\_t^2 \\sigma\_\\omega^2=\\int|t x(t)|^2 d t \\int\\left|x^{\\prime}(t)\\right|^2 d t$. Based on the **Schwarz inequality** we discussed in [1.7](#17-schwarz-inequality), we have $$\\sigma\_t^2 \\sigma\_\\omega^2 \\geq \\left| \\int t x^\*(t) x^\\prime(t) dt \\right|^2$$  
+       Given that $$x^\\prime(t) x^\*(t) = (x^\*(t))' x(t) = \\frac{1}{2} \\frac{d}{dt} |x(t)|^2$$  
+       Based on the integration by parts we explained in [1.6](#16-integration-by-parts), we have 
+
+$$  
+\\begin{aligned}  
+\\int t x^\*(t) x^\\prime(t) d t&=\\frac{1}{2} \\int t \\frac{d}{d t}|x(t)|^2 d t\\\\  
+&= \\frac{1}{2}\\left\[\\left(t|x(t)|^2\\right)^{+\\infty}\_{-\\infty}-\\int|x(t)|^2 dt \\right\]  
+\\end{aligned}  
+$$
+
+        If we let $x(t)$ to be finite energy signal, then we have $|x(t)|$ approximates 0 as $t$ goes to infinity. Thus the above equation becomes  
+$$\\sigma\_t^2 \\sigma\_\\omega^2 \\geq \\left|\\int t x^\*(t) x^\\prime(t) d t \\right|^2= |-\\frac{1}{2} E\_t|^2 = \\frac{1}{4} |E\_t|^2$$
+
+## 8\. Reference
 
 In addition to the links provided in the article, here are some additional references.
 
 (1) Yao, J. (n.d.). Chapter 4: Amplitude Modulation (AM). University of Ottawa. Retrieved from [https://www.site.uottawa.ca/~jpyao/courses/ELG3120_files/ch4.pdf](https://www.site.uottawa.ca/~jpyao/courses/ELG3120_files/ch4.pdf)
 
 (2) Chang Xiao. (n.d.). \[YouTube Channel\]. YouTube. Retrieved from https://www.youtube.com/@changxiao2687
+
+(3) Cohen, L. (1995). Time-frequency analysis. Prentice Hall. Retrieved from https://www.abarproject.ir/file_part/product_part/1394-10-29-20161191936423361601286963.pdf
+
+(4) Lustig, M. (2004). Uncertainty principle. Retrieved from https://inst.eecs.berkeley.edu/~ee120/fa04/Fall04/Lectures/uncertaintyprinciple.pdf
