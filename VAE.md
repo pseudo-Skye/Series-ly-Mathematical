@@ -84,7 +84,7 @@ $$
 \log p_\theta(x)-D_{\mathrm{KL}}\left(q_\phi(z|x) || p_\theta(z|x)\right)=\mathbb{E}\_{z \sim q_\phi(z|x)} \log p_\theta(x|z)-D_{\mathrm{KL}}\left(q_\phi(z|x) \| p_\theta(z)\right)
 $$
 
-The purpose of the loss function is to **find the optimal $\theta$ and $\phi$ that give us the maximum $p_\theta(x)$ while minimizing the KL divergence between $p_\theta(x|z)$ and $q_\phi(x|z)$**. The loss function can be written as:
+The purpose of the loss function is to **find the optimal $\theta$ and $\phi$ that give us the maximum $p_\theta(x)$ while minimizing the KL divergence between $p_\theta(z|x)$ and $q_\phi(z|x)$**. The loss function can be written as:
 
 $$
 \begin{aligned}
