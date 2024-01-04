@@ -96,7 +96,7 @@ $$
 Given $D_{\mathrm{KL}}$ is non-negative, we have
 
 $$
--L_{\mathrm{VAE}}(\theta, \phi) = \log p_\theta(x)-D_{\mathrm{KL}}\left(q_\phi(z|x) || p_\theta(z|x)\right) <= p_\theta(x)
+-L_{\mathrm{VAE}}(\theta, \phi) = \log p_\theta(x)-D_{\mathrm{KL}}\left(q_\phi(z|x) || p_\theta(z|x)\right) <= \log p_\theta(x)
 $$
 
 This $-L_{\mathrm{VAE}}(\theta, \phi)$ is called the **variational lower bound**, or **evidence lower bound (ELBO)**. We can say the purpose of VAE is to **minimize the loss** $-L_{\mathrm{VAE}}(\theta, \phi)$ or **maximize the ELBO** $-L_{\mathrm{VAE}}(\theta, \phi)$. 
