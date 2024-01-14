@@ -146,7 +146,7 @@ J_{DSM_{q_{\sigma}}}(\theta) &=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathb
 $$
 
 ## An overview of denoising score matching
-Both DSM and DAE aim to enhance the robustness of a model by training it to reconstruct clean data from corrupted or noisy input. At the same time, DSM and DAE share a close connection between each other. **When a Gaussian kernel is chosen**,  it suggests that training DSM can be achieved by training a DAE with an associated scalar factor $\frac{1}{2\sigma^4}$. This approach allows you to leverage the principles of denoising and reconstruction errors from DAE while accommodating the DSM objective. 
+Both DSM and DAE aim to enhance the robustness of a model by training it to reconstruct clean data from corrupted or noisy input. At the same time, DSM and DAE share a close connection between each other. **When a Gaussian kernel is chosen**, it suggests that training the DAE is equivalent to performing SM (explicit or implicit) with **the energy function proposed by the paper**. This approach allows you to leverage the principles of denoising and reconstruction errors from DAE while accommodating the DSM objective. 
 
 <p align="center" width="100%">
 <img width="70%" src = "https://github.com/pseudo-Skye/StudyNotes/assets/117964124/059a6f35-7849-48e9-8a47-177af518b7d6">
