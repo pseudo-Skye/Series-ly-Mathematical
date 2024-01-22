@@ -21,7 +21,7 @@ $$
 \end{split}
 $$
 
-where $\[\vec{v_1} \\ \vec{v_2}\]$ describes the direction of rotation $R$, and matrix $L$ describes the scaling matrix $S$ as it scales the eigenvectors along its direction. It is important to note that $R$ is an orthogonal matrix, and $S$ is a diagonal matrix. Thus, we have $R^{-1} = R^T$ and $S = S^T$. The property of $S$ is self-evident, and the **property of the orthogonal $R$ can be proved by**:
+Given that any covariance matrix is symmetric, [the eigenvectors of a symmetric matrix are orthogonal](https://math.stackexchange.com/questions/82467/eigenvectors-of-real-symmetric-matrices-are-orthogonal). Thus, we can say $\[\vec{v_1} \\ \vec{v_2}\]$ describes the direction of rotation $R$, and matrix $L$ describes the scaling matrix $S$ as it scales the eigenvectors along its direction. It is important to note that $R$ is an orthogonal matrix, and $S$ is a diagonal matrix. Thus, we have $R^{-1} = R^T$ and $S = S^T$. The property of $S$ is self-evident, and the **property of the orthogonal $R$ can be proved by**:
 
 $$
 R^T R = \begin{bmatrix}\vec{v_1} & \vec{v_2} \end{bmatrix}^T \begin{bmatrix}\vec{v_1} & \vec{v_2} \end{bmatrix}  = \begin{bmatrix}\vec{v_1}^T \\\ \vec{v_2}^T \end{bmatrix} \begin{bmatrix}\vec{v_1} & \vec{v_2} \end{bmatrix} = \begin{bmatrix}\vec{v_1}^T\vec{v_1} & \vec{v_1}^T \vec{v_2} \\\ \vec{v_2}^T \vec{v_1} & \vec{v_2}^T \vec{v_2}\end{bmatrix} = \begin{bmatrix}1 & 0 \\\ 0 & 1\end{bmatrix} = I
@@ -37,7 +37,7 @@ $$
 \Sigma^\prime = VLV^{-1} = V \sqrt{L} \sqrt{L} V^{-1} = RSSR^{-1} = RSS^TR^T = RS(SR)^T = TT^T
 $$
 
-The key insight is that the transformation $RS$ applied to the original dataset $D$ and the representation $RS(SR)^T$ of the covariance matrix are equivalent. This is because **the covariance matrix measures how data points vary with respect to each other, and this variation is captured by the combined transformation $RS$**. 
+The key insight is that the transformation $RS$ applied to the original dataset $D$ and the $RS$ in the representation $RS(SR)^T$ of the covariance matrix are equivalent. This is because **the covariance matrix measures how data points vary with respect to each other, and this variation is captured by the combined transformation $RS$**. 
 
 It is important to know that the transformation matrix $T$ here is named as the **Cholesky factor**. It is usually written as $\Sigma^\prime = TT^T$. Geometrically, the Cholesky matrix transforms uncorrelated variables into variables whose variances and covariances are given by $\Sigma^\prime$. You can go the other way by taking the inversed matrix $T^{-1}$ to transform the correlated variables into uncorrelated ones. Thus, to decorate the variables and standardize the distribution, we can apply $D = T^{-1}(D^\prime- \mu^\prime)$ to the correlated dataset. 
 
