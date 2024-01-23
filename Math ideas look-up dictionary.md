@@ -3,7 +3,7 @@ I've come across some key math concepts in my machine learning journey, so I mad
 
 ## Quick Glance at Essential Concepts
 1. [Numerical underflow and overflow](#1-numerical-underflow-and-overflow) 
-
+2. [Portfolio mean and variance](#2-portfolio-mean-and-variance)
 
 ## 1. Numerical underflow and overflow
 Numerical underflow and overflow are issues that arise when working with extremely small or large numbers in a computer's finite precision representation.
@@ -35,7 +35,7 @@ log_large_prob = math.log10(10**(50))
 print(log_large_prob)
 ```
 
-## 2. Portfolio variance
+## 2. Portfolio mean and variance
 Suppose we have two assets, Asset 1 (A) and Asset 2 (B). The return ratio of each asset across $n$ days can be denoted as: $A = \\{x_1, x_2, ... , x_n\\}$ and $B = \\{y_1, y_2, ... , y_n\\}$. The **average** return of each asset is denoted as $\bar{x}$ and $\bar{y}$, the **variance** of each asset is marked as $\sigma_a$ and $\sigma_b$, and the **covariance** between the two assets is $\sigma_{ab}$. Say that we split our investment into two parts, where $w_a$ is the ratio we invest in asset A and $w_b$ is the ratio we invest in asset B, and $w_a + w_b = 1$. 
 
 In this case, we can firstly obtain the **mean** $\bar{r}$ of our total return ratio  as:
