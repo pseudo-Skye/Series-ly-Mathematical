@@ -34,7 +34,7 @@ $$
 The covariance matrix $\Sigma^\prime$ can be represented as:
 
 $$
-\Sigma^\prime = VLV^{-1} = V \sqrt{L} \sqrt{L} V^{-1} = RSSR^{-1} = RSS^TR^T = RS(SR)^T = TT^T
+\Sigma^\prime = VLV^{-1} = V \sqrt{L} \sqrt{L} V^{-1} = RSSR^{-1} = RSS^TR^T = RS(RS)^T = TT^T
 $$
 
 The key insight is that the transformation $RS$ applied to the original dataset $D$ and the $RS$ in the representation $RS(SR)^T$ of the covariance matrix are equivalent. This is because **the covariance matrix measures how data points vary with respect to each other, and this variation is captured by the combined transformation $RS$**. 
