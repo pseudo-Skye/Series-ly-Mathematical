@@ -81,3 +81,28 @@ w_2 \\
 w_s
 \end{array}\right\]
 $$
+
+## 3. Properties of symmetric matrix
+
+### (1) Eigenvectors corresponding to distinct eigenvalues are orthogonal
+Given a square matrix $A$, for any vector $\vec{x}$ and $\vec{y}$, we have:
+
+$$
+(A\vec{x})\cdot\vec{y}= (A\vec{x})^T\vec{y} = (\vec{x})^T A^T \vec{y} = (\vec{x})^T (A^T \vec{y}) = \vec{x} \cdot(A^T\vec{y})
+$$
+
+Now, if we have the matrix $A$ to be symmetric where $A = A^T$, and **suppose it has two different eigenvalues** as $\mu$ and $\lambda$, and the corresponding eigenvectors as $\vec{x}$ and $\vec{y}$, we have:
+
+$$
+\mu(\vec{x} \cdot \vec{y}) = (A\vec{x})\cdot\vec{y} = \vec{x} \cdot(A^T\vec{y}) = \vec{x} \cdot(A\vec{y}) = \vec{x} \cdot(\lambda\vec{y}) = \lambda(\vec{x} \cdot \vec{y})
+$$
+
+As $\mu \neq \lambda$, we have $\vec{x} \cdot \vec{y} = 0$. This proof can be extended to any other pairwise eigenvectors of matrix $A$ if it has more than 2 eigenvectors. Thus, **eigenvectors of a symmetric matrix with distinct eigenvalues are orthogonal**.
+
+
+
+
+
+
+
+
