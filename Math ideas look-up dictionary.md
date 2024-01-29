@@ -4,6 +4,8 @@ I've come across some key math concepts in my machine learning journey, so I mad
 ## Quick Glance at Essential Concepts
 1. [Numerical underflow and overflow](#1-numerical-underflow-and-overflow) 
 2. [Portfolio mean and variance](#2-portfolio-mean-and-variance)
+3. [Properties of symmetric matrix](#3-properties-of-symmetric-matrix)
+4. [Precision matrix](#4-precision-matrix)
 
 ## 1. Numerical underflow and overflow
 Numerical underflow and overflow are issues that arise when working with extremely small or large numbers in a computer's finite precision representation.
@@ -98,6 +100,52 @@ $$
 $$
 
 As $\mu \neq \lambda$, we have $\vec{x} \cdot \vec{y} = 0$. This proof can be extended to any other pairwise eigenvectors of matrix $A$ if it has more than 2 eigenvectors. Thus, **eigenvectors of a symmetric matrix with distinct eigenvalues are orthogonal**.
+
+### (2) Symmetric matrix always has eigenvalues
+To prove this property, we need to prove that $\text{det}(A-\lambda I) = 0$ always has at least one solution for the eigenvalue $\lambda$. First, you need to acquaint yourself with the concept of [Laplace expansion](https://www.statlect.com/matrix-algebra/Laplace-expansion-minors-cofactors-adjoints#:~:text=The%20Laplace%20expansion%20is%20a,its%20signed%20minors%2C%20called%20cofactors.). If we define $B = A-\lambda I$ as a $K \times K$ matrix (with $K \geq 2$ ), denote by $C_{i j} = (-1)^{i+j}|M_{ij}|$ the cofactor of an entry $B_{i j}$, then, for any row $i$, the following row expansion holds:
+
+$$
+\text{det}(B)=\sum_{j=1}^K B_{i j} C_{i j}
+$$
+
+Similarly, for any column $i$, the following column expansion holds:
+
+$$
+\text{det}(B)=\sum_{i=1}^K B_{i j} C_{i j}
+$$
+
+It is said that based on the cofactor(Laplace) expansion (*the proof is relatively hard so I will skip, you can give a try...*), we can let $f(\lambda)=\text{det}\left(A-\lambda I\right)$ be its characteristic polynomial. Then $f(\lambda)$ is a polynomial of degree $n$. Moreover, $f(\lambda)$ has the form
+
+$$
+f(\lambda)=\text{det}\left(A-\lambda I_n\right) =(-1)^n \lambda^n+(-1)^{n-1} \text{Tr}(A) \lambda^{n-1}+\cdots+\text{det}(A) 
+$$
+
+where $\text{Tr}(A)$ is the trace of the square matrix $A$, and the number $\text{Tr}(A)$ is obtained by **summing the diagonal entries** of $A$. By the fundamental theorem of algebra, for a polynomial equation of degree $n$, $f(\lambda) = 0$ possesses precisely $n$ roots. Thus, we can rewrite the above equation as:
+
+$$
+f(\lambda)=(-1)^n\left(\lambda-\lambda_1\right)\left(\lambda-\lambda_2\right) \cdots\left(\lambda-\lambda_n\right)
+$$
+
+### (3) Eigendecomposition of real symmetric matrices (spectral decomposition)
+As we have proved that real symmetric matrix always has eigenvalues and eigenvectors, we can have:
+
+$$
+\begin{split}
+AV &= VL \\
+AV &= \begin{bmatrix}\vec{v_1} & \vec{v_2} & ... &\vec{v_n} \end{bmatrix} \begin{bmatrix}\lambda_1 & 0 & ... & 0 \\\ 0 & \lambda_2 & ... & 0 \\\ 0&0&...&\lambda_n  \end{bmatrix} \\
+A&= VLV^{-1}
+\end{split}
+$$
+
+## 4. Precision matrix
+The precision matrix or concentration matrix is the matrix **inverse** of the covariance matrix, which is denoted as $P = \Sigma^{-1}$. For univariate distributions, the precision is defined as the reciprocal of the variance, which is denoted as $p = \frac{1}{\sigma^2}$. 
+
+The key property of the precision matrix is that its zeros tell you about conditional independence. $P_{ij} = 0$ if and only if $X_i$ and $X_j$ are **conditionally independent** given all other coordinates of $X$. Here is an example from a research paper showing how a precision matrix corresponds to a graph. 
+
+<p align="center" width="100%">
+<img width="60%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/b591d82e-c74e-461f-b5cd-13c491623aec">
+</p>
+
 
 
 
