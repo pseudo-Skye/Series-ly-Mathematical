@@ -141,7 +141,7 @@ J_{DSM_{q_{\sigma}}}(\theta) &=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathb
 &=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathbf{x}})}\left\[\frac{1}{2}\left\Vert\psi(\tilde{\mathbf{x}}; \theta)-\frac{1}{\sigma^2} (\mathbf{x}-\tilde{\mathbf{x}})\right\Vert^2\right\] \\
 &=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathbf{x}})}\left\[\frac{1}{2}\left\Vert\frac{1}{\sigma^2}\left(\mathbf{W}^T \text{sigmoid}(\mathbf{W} \tilde{\mathbf{x}}+\mathbf{b})+\mathbf{c}-\tilde{\mathbf{x}}\right)-\frac{1}{\sigma^2} (\mathbf{x}-\tilde{\mathbf{x}})\right\Vert^2\right\]\\
 &=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathbf{x}})}\frac{1}{2\sigma^4} \left\Vert \mathbf{W}^T \text{sigmoid}(\mathbf{W} \tilde{\mathbf{x}}+\mathbf{b})+\mathbf{c}-\mathbf{x}\right\Vert^2\\
-&=\mathbb{E}\_{q_{\sigma}(\mathbf{x}, \tilde{\mathbf{x}})}\frac{1}{2\sigma^4}J_{D A E \sigma}(\theta)
+&=\frac{1}{2\sigma^4}J_{D A E \sigma}(\theta)
 \end{aligned}
 $$
 
@@ -149,5 +149,5 @@ $$
 Both DSM and DAE aim to enhance the robustness of a model by training it to reconstruct clean data from corrupted or noisy input. At the same time, DSM and DAE share a close connection between each other. **When a Gaussian kernel is chosen**, it suggests that training the DAE is equivalent to performing SM (explicit or implicit) with **the energy function proposed by the paper**. This approach allows you to leverage the principles of denoising and reconstruction errors from DAE while accommodating the DSM objective. 
 
 <p align="center" width="100%">
-<img width="70%" src = "https://github.com/pseudo-Skye/StudyNotes/assets/117964124/059a6f35-7849-48e9-8a47-177af518b7d6">
+<img width="70%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/3c6103eb-1d3f-4204-8ca8-1c56aadb12d3">
 </p>
