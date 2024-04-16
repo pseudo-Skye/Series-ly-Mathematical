@@ -6,6 +6,7 @@ I've come across some key math concepts in my machine learning journey, so I mad
 2. [Portfolio mean and variance](#2-portfolio-mean-and-variance)
 3. [Properties of symmetric matrix](#3-properties-of-symmetric-matrix)
 4. [Precision matrix](#4-precision-matrix)
+5. [Logarithm rules](#5-logarithm-rules)
 
 ## 1. Numerical underflow and overflow
 Numerical underflow and overflow are issues that arise when working with extremely small or large numbers in a computer's finite precision representation.
@@ -146,10 +147,64 @@ The key property of the precision matrix is that its zeros tell you about condit
 <img width="60%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/b591d82e-c74e-461f-b5cd-13c491623aec">
 </p>
 
+## 5. Logarithm rules
+1. **Change of base rules**: $\log_a b = \frac{\ln b}{\ln a}$, and the **proof** is given as follows:
+
+$$
+\begin{split}
+b &= a^{\log_a b} = \left(e^{\ln a}\right)^{\log_a b} = e^{\ln a \log_a b} \\
+b &= e^{\ln b} = e^{\ln a \log_a b} \\
+\ln b &= \ln a \log_a b \\
+\log_a b &= \frac{\ln b}{\ln a}
+\end{split}
+$$
+
+2. $\log_a x \leq x-1,~x>0$ and $a>0,~a\neq 1$ ? **No, only when $a=e$**.
+
+&emsp; We can firstly define $f(x) = \log_a x-x+1$, we have $f'(x) = \frac{1}{x\ln a}-1$, set $f'(x) = 0$, we have $x = \frac{1}{\ln a}$, then we need to discuss **the impact of $a$ with repsect to the value of $f'(x)$**. 
+
+&emsp; (1) **When $0 < a < 1$**
+
+&emsp; We have $\ln a < 0$ and $x = \frac{1}{\ln a} < 0$. For $x>0 \rightarrow f'(x) < 0 \rightarrow f(x) \downarrow$, the maximum value of $f(x)$ happens when $x \rightarrow 0$, which means $f(x) = \log_a x-x+1 \rightarrow \infty$. 
+
+&emsp; So, when $0< x \leq 1$, $f(x) = \log_a x-x+1 \geq 0$ and $\log_a x \geq x-1$; 
+
+&emsp; and when $x > 1$, $f(x) = \log_a x-x+1 < 0$ and $\log_a x < x-1$
+
+&emsp; Example of $f(x) = \log_{\frac{1}{2}} x-x+1$: 
+
+<p align="center" width="100%">
+<img width="30%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/7a0d3226-b9b0-42c1-9b87-bcb2a0915bcd">
+</p>
 
 
+&emsp; (2) **When $a > 1$**
 
+&emsp; We have $\ln a > 0$ and $x = \frac{1}{\ln a} > 0$. So $0 < x < \frac{1}{\ln a} \rightarrow f'(x) > 0 \rightarrow f(x) \uparrow$; $x > \frac{1}{\ln a} \rightarrow f'(x) < 0 \rightarrow f(x) \downarrow$. Thus, the maximum value of $f(x)$ happens when $x = \frac{1}{\ln a}$, which is given by:
 
+$$
+f(x)_\text{max} = f(x = \frac{1}{\ln a}) = \log_a \frac{1}{\ln a} - \frac{1}{\ln a} + 1 = \log_a 1 - \log_a \ln a - \frac{1}{\ln a} + 1 = - \log_a \ln a - \frac{1}{\ln a} + 1,~a>1
+$$ 
+
+&emsp; Based on the logarithm change of base rules, we have:
+
+$$
+f(x)_\text{max} = f(x = \frac{1}{\ln a}) = -\frac{\ln \ln a}{\ln a} - \frac{1}{\ln a} + 1 = -\frac{\ln \ln a + 1}{\ln a} + 1 = -\frac{\ln \left(e\ln a\right)}{\ln a} + 1,~a>1
+$$
+
+&emsp; Similarly, we can obatin $g(x) = e\ln x -x$, and follow the same process, we have $g(x)\_\text{max} = g(x=e) = 0$, thus $e\ln x -x \leq 0$ and $e\ln x \leq x$. So for the above equation, we have $\ln \left(e\ln a\right) \leq \ln a$, and thus $\frac{\ln \left(e\ln a\right)}{\ln a} \leq 1$, which means $f(x)_\text{max} \geq 0$. This means, only when $a=e$ we will have $\ln x \leq x-1,~x>0$.
+
+&emsp; Example of $f(x) = \log_{10} x-x+1$: 
+
+<p align="center" width="100%">
+<img width="30%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/cf74a9d3-fa89-48d5-bc3c-e68812743ece">
+</p>
+
+&emsp; Example of $f(x) = \ln x-x+1$: 
+
+<p align="center" width="100%">
+<img width="30%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/6a31a304-c544-4b26-81bf-800ecba78892">
+</p>
 
 
 
