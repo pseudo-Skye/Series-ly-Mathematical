@@ -7,6 +7,7 @@ I've come across some key math concepts in my machine learning journey, so I mad
 3. [Properties of symmetric matrix](#3-properties-of-symmetric-matrix)
 4. [Precision matrix](#4-precision-matrix)
 5. [Logarithm rules](#5-logarithm-rules)
+6. [Information entropy](#6-information-entropy)
 
 ## 1. Numerical underflow and overflow
 Numerical underflow and overflow are issues that arise when working with extremely small or large numbers in a computer's finite precision representation.
@@ -206,6 +207,31 @@ $$
 <img width="30%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/6a31a304-c544-4b26-81bf-800ecba78892">
 </p>
 
+## 6. Information entropy
+The **information** can be quantified by the unit of **bit** (short for binary digit), which is analogous to how we use kilograms (kg) for weight. In the context of information entropy, a bit represents a unit of information based on **binary (two-state) choices**, similar to how digital information is stored as 0s and 1s. 
+
+When you flip a fair coin, you have two possible outcomes: heads or tails, each with a probability of 50%. This reflects the fact that each of the two equally probable outcomes (heads or tails) will contribute 1 bit of information to the overall scenario. The information of each event outcome can be written as:
+
+- $\log_2 2=1$ bit: This corresponds to flipping a fair coin (2 outcomes—H, T), where 1 bit of information is needed to specify each outcome.
+- $\log_2 4=2$ bits: This is like flipping a coin twice (4 possible sequences—HH, HT, TH, TT), requiring 2 bits to describe each sequence.
+
+Hence, the use of the **base-2 logarithm** $\log_2$ in the following entropy formula is precisely because we are dealing with binary information. **Information entropy** $H(X)$ is a measure of the **average uncertainty** of the outcomes of a random variable $X$, or we say it **quantifies how much information is needed** to describe the outcome of an event. The formula of entropy calculation is given by:
+
+$$
+H(X) = \sum p_i \log \frac{1}{p_i} = -\sum p_i \log {p_i}
+$$
+
+where $p_i$ is the possibility of outcome $i$. Still, in the example of tossing a coin, we have the possibility of getting a tail or head is $p_1 = p_2 = 50%$. In this case, the average uncertainty of the outcomes of a coin flip is given by: 
+
+$$
+H(X) = p_1 \log \frac{1}{p_1} + p_2 \log \frac{1}{p_2} = 1
+$$
+
+So, the **average uncertainty of flipping a coin** is 1 bit. Similarly, for a event with $N$ **equally** possible outcomes ($p_i = \frac{1}{N}$), the entropy is given by: 
+
+$$
+H(X) = p_1 \log \frac{1}{p_1} + p_2 \log \frac{1}{p_2} + ... p_N \log \frac{1}{p_N} = (p_1+p_2+p_3+...p_N) \log N = N \times \frac{1}{N} \log N = \log N
+$$
 
 
 
