@@ -93,7 +93,7 @@ L_{\mathrm{VAE}}(\theta, \phi) & =-\log p_\theta(x)+D_{\mathrm{KL}}\left(q_\phi(
 \end{aligned}
 $$
 
-Given $D_{\mathrm{KL}}$ is non-negative, we have
+Given $D_{\mathrm{KL}}$ is [non-negative](https://github.com/pseudo-Skye/Series-ly-Mathematical/blob/main/Information%20entropy.md#3-gibbs-inequality), we have
 
 $$
 -L_{\mathrm{VAE}}(\theta, \phi) = \log p_\theta(x)-D_{\mathrm{KL}}\left(q_\phi(z|x) || p_\theta(z|x)\right) <= \log p_\theta(x)
