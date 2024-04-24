@@ -1,4 +1,4 @@
-# Information entropy
+# Information Entropy
 The **information** can be quantified by the unit of **bit** (short for binary digit), which is analogous to how we use kilograms (kg) for weight. In the context of information entropy, a bit represents a unit of information based on **binary (two-state) choices**, similar to how digital information is stored as 0s and 1s. 
 
 When you flip a fair coin, you have two possible outcomes: heads or tails, each with a probability of 50%. This reflects the fact that each of the two equally probable outcomes (heads or tails) will contribute 1 bit of information to the overall scenario. The information of each event outcome can be written as:
