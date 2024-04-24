@@ -75,7 +75,7 @@ $$
 This is the same to maximize both sides of the following equation: 
 
 $$
-\log p(x)-D_\mathrm{KL}\left(q(z|x)||p(z|x)\right)=\mathbb{E}_{z \sim q(z|x)} - D\_\mathrm{KL}(q(z|x)||p(z))
+\log p(x)-D_\mathrm{KL}\left(q(z|x)||p(z|x)\right)=\mathbb{E}_{z \sim q(z|x)} \log p(x|z) - D\_\mathrm{KL}(q(z|x)||p(z))
 $$
 
 Given that we can denote the parameters of the prior distribution of $z$ as $p_\theta(z)$, the true posterior distribution of $z$ as $p_\theta(z|x)$, and the parameters in the encoder to approximate $p_\theta(z|x)$ as $q_\phi(z|x)$, we can rewrite the above equation as: 
@@ -99,7 +99,7 @@ $$
 -L_{\mathrm{VAE}}(\theta, \phi) = \log p_\theta(x)-D_{\mathrm{KL}}\left(q_\phi(z|x) || p_\theta(z|x)\right) <= \log p_\theta(x)
 $$
 
-This $-L_{\mathrm{VAE}}(\theta, \phi)$ is called the **variational lower bound**, or **evidence lower bound (ELBO)**. We can say the purpose of VAE is to **minimize the loss** $-L_{\mathrm{VAE}}(\theta, \phi)$ or **maximize the ELBO** $-L_{\mathrm{VAE}}(\theta, \phi)$. 
+This $-L_{\mathrm{VAE}}(\theta, \phi)$ is called the **variational lower bound**, or [evidence lower bound (ELBO)](https://github.com/pseudo-Skye/Series-ly-Mathematical/blob/main/Math%20ideas%20look-up%20dictionary.md#6-the-evidence-lower-bound-elbo). We can say the purpose of VAE is to **minimize the loss** $-L_{\mathrm{VAE}}(\theta, \phi)$ or **maximize the ELBO** $-L_{\mathrm{VAE}}(\theta, \phi)$. 
 
 Suppose our assumption to the prior distribution $p(z)$ is **standard Gaussian distribution**, then given the loss function from above, we can also write the loss function as: 
 
