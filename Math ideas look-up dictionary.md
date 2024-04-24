@@ -7,8 +7,7 @@ I've come across some key math concepts in my machine learning journey, so I mad
 3. [Properties of symmetric matrix](#3-properties-of-symmetric-matrix)
 4. [Precision matrix](#4-precision-matrix)
 5. [Logarithm rules](#5-logarithm-rules)
-6. [Information entropy](#6-information-entropy)
-
+6. [The evidence lower bound (ELBO)](#6-the-evidence-lower-bound-elbo)
 ## 1. Numerical underflow and overflow
 Numerical underflow and overflow are issues that arise when working with extremely small or large numbers in a computer's finite precision representation.
 
@@ -149,7 +148,9 @@ The key property of the precision matrix is that its zeros tell you about condit
 </p>
 
 ## 5. Logarithm rules
-1. **Change of base rules**: $\log_a b = \frac{\ln b}{\ln a}$, and the **proof** is given as follows:
+### (1) Change of base rules: $`\log_a b = \frac{\ln b}{\ln a}`$
+
+**Proof**:
 
 $$
 \begin{split}
@@ -160,11 +161,11 @@ b &= e^{\ln b} = e^{\ln a \log_a b} \\
 \end{split}
 $$
 
-2. $\log_a x \leq x-1,~x>0$ and $a>0,~a\neq 1$ ? **No, only when $a=e$**.
+### (2) $`\log_a x \leq x-1,~x>0$ and $a>0,~a\neq 1`$ ? No, only when $`a=e`$.
 
 &emsp; We can firstly define $f(x) = \log_a x-x+1$, we have $f'(x) = \frac{1}{x\ln a}-1$, set $f'(x) = 0$, we have $x = \frac{1}{\ln a}$, then we need to discuss **the impact of $a$ with repsect to the value of $f'(x)$**. 
 
-&emsp; (1) **When $0 < a < 1$**
+&emsp; (a) **When $0 < a < 1$**
 
 &emsp; We have $\ln a < 0$ and $x = \frac{1}{\ln a} < 0$. For $x>0 \rightarrow f'(x) < 0 \rightarrow f(x) \downarrow$, the maximum value of $f(x)$ happens when $x \rightarrow 0$, which means $f(x) = \log_a x-x+1 \rightarrow \infty$. 
 
@@ -179,7 +180,7 @@ $$
 </p>
 
 
-&emsp; (2) **When $a > 1$**
+&emsp; (b) **When $a > 1$**
 
 &emsp; We have $\ln a > 0$ and $x = \frac{1}{\ln a} > 0$. So $0 < x < \frac{1}{\ln a} \rightarrow f'(x) > 0 \rightarrow f(x) \uparrow$; $x > \frac{1}{\ln a} \rightarrow f'(x) < 0 \rightarrow f(x) \downarrow$. Thus, the maximum value of $f(x)$ happens when $x = \frac{1}{\ln a}$, which is given by:
 
@@ -207,31 +208,81 @@ $$
 <img width="30%" src = "https://github.com/pseudo-Skye/Series-ly-Mathematical/assets/117964124/6a31a304-c544-4b26-81bf-800ecba78892">
 </p>
 
-## 6. Information entropy
-The **information** can be quantified by the unit of **bit** (short for binary digit), which is analogous to how we use kilograms (kg) for weight. In the context of information entropy, a bit represents a unit of information based on **binary (two-state) choices**, similar to how digital information is stored as 0s and 1s. 
-
-When you flip a fair coin, you have two possible outcomes: heads or tails, each with a probability of 50%. This reflects the fact that each of the two equally probable outcomes (heads or tails) will contribute 1 bit of information to the overall scenario. The information of each event outcome can be written as:
-
-- $\log_2 2=1$ bit: This corresponds to flipping a fair coin (2 outcomes—H, T), where 1 bit of information is needed to specify each outcome.
-- $\log_2 4=2$ bits: This is like flipping a coin twice (4 possible sequences—HH, HT, TH, TT), requiring 2 bits to describe each sequence.
-
-Hence, the use of the **base-2 logarithm** $\log_2$ in the following entropy formula is precisely because we are dealing with binary information. **Information entropy** $H(X)$ is a measure of the **average uncertainty** of the outcomes of a random variable $X$, or we say it **quantifies how much information is needed** to describe the outcome of an event. The formula of entropy calculation is given by:
+### (3) Concavity of log function
+Based on the [Jensen's Inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality), the log function is a concave function, where 
 
 $$
-H(X) = \sum p_i \log \frac{1}{p_i} = -\sum p_i \log {p_i}
+\begin{split}
+f(\mathbb{E} \[x \]) &\geq \mathbb{E}\[f(x)\] \\
+\log (\sum \omega_i x_i) &\geq \sum \omega_i \log x_i
+\end{split}
 $$
 
-where $p_i$ is the possibility of outcome $i$. Still, in the example of tossing a coin, we have the possibility of getting a tail or head is $p_1 = p_2 = 50%$. In this case, the average uncertainty of the outcomes of a coin flip is given by: 
+## 6. The evidence lower bound (ELBO)
+The Evidence Lower Bound (ELBO) is a general concept used in the context of probabilistic models with hidden latent representations, like **variational autoencoders and diffusion models**. It provides a lower bound on the **log-likelihood** of the observed data under the model. Before talking about ELBO, it is important to understand [information entropy](https://github.com/pseudo-Skye/Series-ly-Mathematical/blob/main/Information%20entropy.md#information-entropy). The **evidence $p(x;\theta)$** refers to **the marginal likelihood of the observed data under the model**. Given the latent representation $h$ and the **approximation** $q(h|x)$ of a true distribution $p(h|x)$, we have:
 
 $$
-H(X) = p_1 \log \frac{1}{p_1} + p_2 \log \frac{1}{p_2} = 1
+\log p(x) = \log \left(\sum_h p(x,h) \right) = \log \left(\sum_h q(h|x)\frac{p(x,h)}{q(h|x)} \right)
 $$
 
-So, the **average uncertainty of flipping a coin** is 1 bit. Similarly, for a event with $N$ **equally** possible outcomes ($p_i = \frac{1}{N}$), the entropy is given by: 
+Based on the [concavity of log function](#3-concavity-of-log-function), we can have:
 
 $$
-H(X) = p_1 \log \frac{1}{p_1} + p_2 \log \frac{1}{p_2} + ... p_N \log \frac{1}{p_N} = (p_1+p_2+p_3+...p_N) \log N = N \times \frac{1}{N} \log N = \log N
+\log p(x) = \log \left(\sum_h q(h|x)\frac{p(x,h)}{q(h|x)} \right) \geq \sum_h q(h|x) \log \frac{p(x,h)}{q(h|x)} = \sum_h q(h|x)\log p(x,h) - \sum_h q(h|x)\log(h|x) = \mathbb{E}_q \[ \log \frac{p(x,h)}{q(h|x)} \]
 $$
+
+The right-hand side of the above is known as **ELBO**: 
+
+$$
+\text{ELBO} :=  \sum_h q(h|x) \log \frac{p(x,h)}{q(h|x)} = \mathbb{E}_q \[ \log \frac{p(x,h)}{q(h|x)} \]
+$$
+
+Thus, $\log p(x) \geq \text{ELBO}$, and when we **correctly model the latent representation $h$ by the observed $x$** ($`p(h|x) = q(h|x)`$), the ELBO will approaching $\log (x)$. The proof of equivalence is given by: 
+
+$$
+\begin{split}
+\text{ELBO} &= \sum_h q(h|x)\log p(x,h) - \sum_h q(h|x)\log(h|x) \\
+&= \sum_h p(h|x)\log \[p(h|x)p(x)\] - \sum_h p(h|x)\log(h|x) \\
+&= \sum_h p(h|x)\log p(h|x) + \sum_h p(h|x)\log p(x) - \sum_h p(h|x)\log p(h|x) \\
+&= \sum_h p(h|x)\log p(x) = \log p(x) \sum_h p(h|x) = \log p(x)
+\end{split}
+$$
+
+Intuitively, the **difference** between $\log(x)$ and ELBO is $\log(x) - \text{ELBO} = D_{KL}(q(h|x) || p(h|x))$, which evaluates **how well we approximate $q(h|x)$ to the true distribution $p(h|x)$**. This difference can also be proved by:
+
+$$
+\begin{split}
+D_{KL}(q(h|x) || p(h|x)) &= \sum_h q(h|x) \log \frac{q(h|x)}{p(h|x)} = \sum_h q(h|x) \log \frac{q(h|x)p(x)}{p(x,h)} \\
+&= \sum_h q(h|x) \[ \log q(h|x) + \log p(x) - \log p(x,h)\] \\
+&=  \sum_h q(h|x) \log \frac{q(h|x)}{p(x,h)} +  \sum_h q(h|x) \log p(x) \\
+&= -\sum_h q(h|x) \log \frac{p(x,h)}{q(h|x)} + \log p(x) = \log p(x) - \text{ELBO}
+\end{split}
+$$
+
+- The [ELBO in VAE](https://github.com/pseudo-Skye/Series-ly-Mathematical/blob/main/VAE.md#loss-function-of-vae-evidence-lower-boundelbo) is given by: 
+
+$$
+\begin{aligned}
+\text{ELBO} &= \mathbb{E}\_q \[ \log \frac{p(x,h)}{q(h|x)} \] \\
+&= \mathbb{E}\_q \[ \log \frac{p(x|h) p(h)}{q(h|x)} \] = \sum_h q(h|x) \log p(x|h) - \sum\_h q(h|x) \log \frac{q(h|x)}{p(h)} = \mathbb{E}\_{h \sim q_\phi(h|x)} \log p_\theta(x|h)-D_{\mathrm{KL}}\left(q_\phi(h|x) || p_\theta(h)\right) \\
+&= \mathbb{E}\_q \[ \log \frac{p(h|x) p(x)}{q(h|x)} \] = \sum_h q(h|x) \log p(x) - \sum_h q(h|x) \log \frac{q(h|x)}{p(h|x)} = \log p_\theta(x) - D_{\mathrm{KL}}\left(q_\phi(h|x) || p_\theta(h|x)\right) \\
+& = -L_{\mathrm{VAE}}(\theta, \phi) 
+\end{aligned}
+$$
+
+&emsp; where $q_\phi$ is the encoder function and $p_\theta$ is the decoder function. 
+
+- The ELBO in [Diffusion](https://github.com/pseudo-Skye/Time-Matters/blob/main/financial%20trading/Dva%20(CIKM%2023).md#diffusion-in-time-series) is given by:
+
+$$
+\begin{aligned}
+p(x,h) &:= p_\theta (\mathbf{x}\_{0:T}) = p\left(\mathbf{x}\_T\right) \prod_{t=1}^T p_\theta\left(\mathbf{x}\_{t-1} | \mathbf{x}\_t\right), \quad p\_\theta\left(\mathbf{x}\_{t-1} | \mathbf{x}\_t\right):=\mathcal{N}\left(\mathbf{x}\_{t-1} ; \boldsymbol{\mu}\_\theta\left(\mathbf{x}\_t, t\right), \mathbf{\Sigma}\_\theta\left(\mathbf{x}\_t, t\right)\right) \\
+q(h|x) &:= q(\mathbf{x}\_{1:T}|\mathbf{x}\_0) =  \prod_{t=1}^T q\left(\mathbf{x}\_t | \mathbf{x}\_{t-1}\right), \quad q\left(\mathbf{x}\_t \mid \mathbf{x}\_{t-1}\right):=\mathcal{N}\left(\mathbf{x}\_t ; \sqrt{1-\beta_t} \mathbf{x}\_{t-1}, \beta_t \mathbf{I}\right) \\
+\text{ELBO} &= \mathbb{E}\_q \[ \log \frac{p(x,h)}{q(h|x)} \] = \mathbb{E}\_q \[ \log \frac{p_\theta (\mathbf{x}\_{0:T})}{q(\mathbf{x}\_{1:T}|\mathbf{x}\_0)} \] = \mathbb{E}\_q \[\log p(\mathbf{x}\_T) + \sum_{t=1}^T \log \frac{p_\theta\left(\mathbf{x}\_{t-1} | \mathbf{x}\_t\right)}{q\left(\mathbf{x}\_t | \mathbf{x}\_{t-1}\right)} \] \\
+&= -L_{\mathrm{Diffusion}}(\theta) 
+\end{aligned}
+$$
+
 
 
 
