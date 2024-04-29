@@ -70,4 +70,13 @@ $$
 Thus, we have $-\sum p_i \log \frac{p_i}{q_i} \leq 0$, which is the same as $\sum p_i \log p_i - \sum p_i \log q_i \geq 0$, and **KL divergence can never be negative**. 
 
 
+## 4. Cross entropy
+Imagine you have a model that predicts the likelihood of different events happening. Let's say you have some input data $x_i$ (e.g., an image), the **actual probabilities** of the events (i.e., to be a cat) are denoted as $P^*(y|x_i)$. Now, you want to see **how close your model's predictions $P(y|x_i;\theta)$ are to the actual probabilities**. **Cross entropy** helps you do that by calculating the KL divergence between the predicted probabilities from your model with the actual probabilities:
 
+```math
+\begin{split}
+D_{KL}(P^* || P) &= \sum_y P^* (y | x_i) \log \frac{P^*(y | x_i)}{P(y | x_i ; \theta)} \\
+&= \sum_y P^* (y | x_i) \log P^* (y | x_i) - \sum_y P^* (y | x_i) \log P (y | x_i ; \theta) \\
+\end{split}
+```
+As the first part $\sum_y P^* (y | x_i) \log P^* (y | x_i)$ does not depend on $\theta$, the objective function can be simply written as the cross entropy loss: $\mathcal{L} = - \sum_y P^* (y | x_i) P(y | x_i ; \theta)$. 
